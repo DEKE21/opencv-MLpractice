@@ -1,25 +1,25 @@
-import numpy as np
-import cv2 as cv
- 
-cap = cv.VideoCapture(0)
-if not cap.isOpened():
-    print("Cannot open camera")
-    exit()
-while True:
-    # Capture frame-by-frame
-    ret, frame = cap.read()
- 
-    # if frame is read correctly ret is True
-    if not ret:
-        print("Can't receive frame (stream end?). Exiting ...")
-        break
-    # Our operations on the frame come here
-    gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
-    # Display the resulting frame
-    cv.imshow('frame', gray)
-    if cv.waitKey(1) == ord('q'):
-        break
- 
-# When everything done, release the capture
-cap.release()
-cv.destroyAllWindows()
+import cv2
+import cv2.misc
+import numpy
+
+
+def r_cam():
+    vid = cv2.VideoCapture(0)
+    vid.open(0,0)  
+     
+    while(True):
+        x, frame = vid.read()   
+        vid.grab()
+        if not (x):
+            print("stream error")
+            cv2.destroyAllWindows()
+            vid.release()
+            break
+        c = cv2.cvtColor(frame, cv2.COLOR_HSV2BGR)
+        cv2.imshow('cam', c)
+        #camera does not display without a waitkey esc
+        if(cv2.waitKey(1) == ord('q')):
+            break   
+    vid.release()
+
+r_cam()
