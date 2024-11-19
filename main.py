@@ -20,9 +20,13 @@ def r_cam():
             break
         
         c, face =  dec.detect(frame)
-        
-        if face == None:
+        M = face[0,:]
+        M = M[0]
+        print(M)
+        if  M == None:   
+            print(face)
             cv2.imshow('cam', frame)
+            
         else:
             d = face[0,:]
             d_double = d.astype(int)
