@@ -3,6 +3,7 @@ import cv2.data
 import cv2.mat_wrapper
 import cv2.misc
 import numpy
+import numpy.matlib
 
 
 def r_cam():
@@ -18,19 +19,13 @@ def r_cam():
             cv2.destroyAllWindows()
             vid.release()
             break
-        
         c, face =  dec.detect(frame)
-        M = face[0,:]
-        M = M[0]
-        print(M)
-        if  M == None:   
-            print(face)
-            cv2.imshow('cam', frame)
-            
-        else:
+        try:
             d = face[0,:]
+        except TypeError:
+            cv2.imshow('cam', frame)
+        else:
             d_double = d.astype(int)
-
             eyeLeft =  cv2.drawMarker(frame,[int(d[4]),int(d[5])],[0,0,255])     
             eyeRight =  cv2.drawMarker(frame,[int(d[6]),int(d[7])],[0,0,255])   
             mNose =  cv2.drawMarker(frame,[int(d[8]),int(d[9])],[0,0,255])
