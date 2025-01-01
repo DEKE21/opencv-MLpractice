@@ -25,6 +25,7 @@ def r_cam():
         except TypeError:
             cv2.imshow('cam', frame)
         else:
+
             d_double = d.astype(int)
             eyeLeft =  cv2.drawMarker(frame,[int(d[4]),int(d[5])],[0,0,255])     
             eyeRight =  cv2.drawMarker(frame,[int(d[6]),int(d[7])],[0,0,255])   
